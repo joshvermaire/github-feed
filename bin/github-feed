@@ -15,6 +15,7 @@
 var program    = require('commander')
   , exec       = require('child_process').exec
   , githubFeed = require('../')
+  , readline   = require('readline')
 
 program
   .version(githubFeed.version)
@@ -35,6 +36,7 @@ var getUsername = function (callback) {
 };
 
 var getPassword = function (callback) {
+  readline.emitKeypressEvents(process.stdin);
   program.password('Github Password: ', function(password) {
     process.stdin.destroy();
     return callback(password);
